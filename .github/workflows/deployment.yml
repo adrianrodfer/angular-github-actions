@@ -15,7 +15,14 @@ jobs:
         uses: actions/setup-node@v4
         with: 
           node-version: 20.11
+      - name: Cache dependencies
+        id: cache
+        uses: actions/cache@v4
+        with: 
+          path: node_modules
+          key: deps-node-module-${{ hashFiles('**/package-lock.json') }}
       - name: Install dependecies
+        if: steps.cache.outputs.cache-hit != 'true'
         run: npm ci
       - name: Lint code
         run: npm run lint
@@ -29,7 +36,14 @@ jobs:
         uses: actions/setup-node@v4
         with: 
           node-version: 20.11
+      - name: Cache dependencies
+        id: cache
+        uses: actions/cache@v4
+        with: 
+          path: node_modules
+          key: deps-node-module-${{ hashFiles('**/package-lock.json') }}
       - name: Install dependecies
+        if: steps.cache.outputs.cache-hit != 'true'
         run: npm ci
       - name: Test code
         run: npm run test:prod    
@@ -43,7 +57,14 @@ jobs:
         uses: actions/setup-node@v4
         with: 
           node-version: 20.11
+      - name: Cache dependencies
+        id: cache
+        uses: actions/cache@v4
+        with: 
+          path: node_modules
+          key: deps-node-module-${{ hashFiles('**/package-lock.json') }}
       - name: Install dependecies
+        if: steps.cache.outputs.cache-hit != 'true'
         run: npm ci
       - name: Build code
         run: npm run build:prod

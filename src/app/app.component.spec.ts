@@ -14,16 +14,16 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have the 'Angular Github Actions' title`, () => {
+  it(`should have the 'Github Actions' title`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('Angular Github Actions');
+    expect(app.title).toEqual('Github Actions');
   });
 
   it('should render title', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('h1')?.textContent).toContain('Bienvenido a Angular Github Actions');
+    expect(compiled.querySelector('h1')?.textContent).toContain('Introducción a Github Actions');
   });
 });

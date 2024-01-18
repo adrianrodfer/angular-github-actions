@@ -1,0 +1,28 @@
+name: Deploy Project
+on:
+  push:
+    branches: [main, dev/*]
+  pull_request:
+    branches: [main, dev/*]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get code
+        uses: actions/checkout@v4
+      - name: Install NodeJS
+        uses: actions/setup-node@v4
+        with: 
+          node-version: 20.11
+      - name: Install dependecies
+        run: npm ci
+      - name: Lint code
+        run: npm run lint
+      - name: Test code
+        run: npm run test:prod
+      - name: Build code
+        run: npm run build:prod
+      - name: Deploy Code
+        run: echo "Deploying project..."      
+    

@@ -52,6 +52,7 @@ jobs:
         run: npm run test:prod
       - name: Publish Test Results
         uses: EnricoMi/publish-unit-test-result-action/composite@v2
+        if: always()
         with:
           files: |
             test/**/*.xml

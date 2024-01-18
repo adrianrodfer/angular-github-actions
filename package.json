@@ -9,7 +9,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "build:prod": "ng build --configuration production --base-href /angular-github-actions/",
-    "test:prod": "ng test --karma-config=karma.conf.js --reporters junit"
+    "test:prod": "ng test --karma-config=karma.conf.js --reporters progress,junit"
   },
   "private": true,
   "dependencies": {

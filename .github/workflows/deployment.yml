@@ -6,7 +6,7 @@ on:
     branches: [main, dev/*]
 
 jobs:
-  deploy:
+  lint:
     runs-on: ubuntu-latest
     steps:
       - name: Get code
@@ -19,8 +19,30 @@ jobs:
         run: npm ci
       - name: Lint code
         run: npm run lint
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get code
+        uses: actions/checkout@v4
+      - name: Install NodeJS
+        uses: actions/setup-node@v4
+        with: 
+          node-version: 20.11
+      - name: Install dependecies
+        run: npm ci
       - name: Test code
-        run: npm run test:prod
+        run: npm run test:prod    
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get code
+        uses: actions/checkout@v4
+      - name: Install NodeJS
+        uses: actions/setup-node@v4
+        with: 
+          node-version: 20.11
+      - name: Install dependecies
+        run: npm ci
       - name: Build code
         run: npm run build:prod
       - name: Deploy Code

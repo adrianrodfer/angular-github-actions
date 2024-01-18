@@ -76,7 +76,6 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: dist/angular-github-actions/browser
-          enable_jekyll: true
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:

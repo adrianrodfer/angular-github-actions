@@ -69,5 +69,10 @@ jobs:
       - name: Build code
         run: npm run build:prod
       - name: Deploy Code
-        run: echo "Deploying project..."      
+        run: echo "Deploying project..."
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: dist-files
+          path: dist  
     

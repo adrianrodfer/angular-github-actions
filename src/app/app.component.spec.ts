@@ -24,6 +24,6 @@ describe('AppComponent', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('h1')?.textContent).toContain('Introducción a Github Actions');
+    expect(compiled.querySelector('h1')?.textContent).toContain('Introducció a Github Actions');
   });
 });

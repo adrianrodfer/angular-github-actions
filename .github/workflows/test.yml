@@ -1,6 +1,6 @@
 name: Test Project
 on:
-  push:
+  pull_request:
     branches: [main]
 
   workflow_dispatch:
@@ -26,11 +26,11 @@ jobs:
       - name: Lint code
         run: npm run lint
   test:
-    strategy:
-      matrix:
-        node-version: [16, 17, 18, 20]
-    continue-on-error: true
     runs-on: ubuntu-latest
+    permissions:
+      checks: write
+      pull-requests: write
+      contents: read
     needs: lint
     steps:
       - name: Get code
@@ -38,7 +38,7 @@ jobs:
       - name: Install NodeJS
         uses: actions/setup-node@v4
         with: 
-          node-version: ${{ matrix.node-version }}
+          node-version: 20.11
       - name: Cache dependencies
         id: cache
         uses: actions/cache@v4
@@ -49,4 +49,10 @@ jobs:
         if: steps.cache.outputs.cache-hit != 'true'
         run: npm ci
       - name: Test code
-        run: npm run test:prod 
+        run: npm run test:prod
+      - name: Publish Test Results
+        uses: EnricoMi/publish-unit-test-result-action/composite@v2
+        if: always()
+        with:
+          files: |
+            test/**/*.xml
